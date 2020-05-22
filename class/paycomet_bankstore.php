@@ -26,12 +26,13 @@ class Paycomet_Bankstore
 	private $endpointurl;
 	private $jetid;
 
-	public function __construct($arg1, $arg2, $arg3, $arg4 = NULL)
+	public function __construct($arg1, $arg2, $arg3, $arg4 = NULL, $arg5 = NULL)
 	{
 		$this->merchantCode = $arg1;
 		$this->terminal = $arg2;
 		$this->password = $arg3;
 		$this->jetid = $arg4;
+		$this->defaultIp = $arg5;
 		$this->endpoint = 'https://api.paycomet.com/gateway/xml-bankstore?wsdl';
 		$this->endpointurl = 'https://api.paycomet.com/gateway/ifr-bankstore?';
 	}
@@ -1735,7 +1736,9 @@ class Paycomet_Bankstore
     public function GetClientIp()
     {
         $ipAddress = '';
-        if (isset($_SERVER['REMOTE_ADDR'])) {
+        if (isset($this->defaultIp)) {
+            $ipAddress = $this->defaultIp;
+        } else (isset($_SERVER['REMOTE_ADDR'])) {
             $ipAddress = $_SERVER['REMOTE_ADDR'];
         } else if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $ipAddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
