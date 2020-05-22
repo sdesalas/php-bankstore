@@ -1738,7 +1738,7 @@ class Paycomet_Bankstore
         $ipAddress = '';
         if (isset($this->defaultIp)) {
             $ipAddress = $this->defaultIp;
-        } else (isset($_SERVER['REMOTE_ADDR'])) {
+        } else if (isset($_SERVER['REMOTE_ADDR'])) {
             $ipAddress = $_SERVER['REMOTE_ADDR'];
         } else if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $ipAddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
